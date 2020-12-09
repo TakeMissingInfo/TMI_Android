@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,18 +18,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/benefitButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:backgroundTint="#EA5454"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="혜택 보기"
             android:textSize="28sp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:backgroundTint="#EA5454"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="이용 방법"
             android:textSize="28sp" />
     </LinearLayout>
