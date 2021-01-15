@@ -1,7 +1,12 @@
 package com.example.garam.takemissinginfo
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_soup_kitchen.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -72,6 +77,27 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         val mapView = MapView(this)
         mapView.setMapViewEventListener(this)
         mapView.setPOIItemEventListener(this)
+
+        val locationManager : LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val location = if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION),
+                100)
+            return
+        } else locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+        val latitude = location.latitude
+        val longitude = location.longitude
+
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
+        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
         mapViewLayout.addView(mapView)
 

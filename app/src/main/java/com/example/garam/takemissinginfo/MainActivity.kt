@@ -20,14 +20,15 @@ class MainActivity : AppCompatActivity() {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
             100)
         }
+        var nextIntent : Intent
 
         benefitButton.setOnClickListener {
-            val nextIntent = Intent(this,MainCategory::class.java)
+            nextIntent = Intent(this,MainCategory::class.java)
             startActivity(nextIntent)
         }
 
         soupKitchenButton.setOnClickListener {
-            val nextIntent = Intent(this,SoupKitchenActivity::class.java)
+            nextIntent = Intent(this,SoupKitchenActivity::class.java)
             startActivity(nextIntent)
         }
 
