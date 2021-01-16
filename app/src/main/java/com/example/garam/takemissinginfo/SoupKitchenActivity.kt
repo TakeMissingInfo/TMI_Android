@@ -2,8 +2,10 @@ package com.example.garam.takemissinginfo
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
@@ -13,6 +15,17 @@ import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, MapView.POIItemEventListener {
+
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: SoupKitchenActivity? = null
+        fun context() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
 
@@ -59,6 +72,11 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         p1: MapPOIItem?,
         p2: MapPOIItem.CalloutBalloonButtonType?
     ) {
+        val url = "https://map.kakao.com/link/to/${p1?.itemName},${p1?.mapPoint?.mapPointGeoCoord?.latitude}, ${p1?.mapPoint?.mapPointGeoCoord?.longitude}"
+        val nextIntent = Intent(Intent.ACTION_VIEW,Uri.parse(url))
+        nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        startActivity(nextIntent)
 
     }
 
@@ -95,6 +113,8 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
         val latitude = location.latitude
         val longitude = location.longitude
+
+
 
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
