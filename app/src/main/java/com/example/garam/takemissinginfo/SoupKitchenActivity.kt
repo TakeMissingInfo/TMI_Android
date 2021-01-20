@@ -4,12 +4,14 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.LocationManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_soup_kitchen.*
+import net.daum.mf.map.api.MapCircle
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -114,11 +116,19 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         val latitude = location.latitude
         val longitude = location.longitude
 
-
-
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
+        val circle = MapCircle(MapPoint.mapPointWithGeoCoord(latitude,longitude),500,
+        Color.argb(128,255,0,0),
+        Color.argb(128,0,255,0))
+
+        mapView.addCircle(circle)
+
+        val marker = MapPOIItem()
+        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude + 0.3,longitude + 0.3)
+        marker.itemName = "테스트"
+        mapView.addPOIItem(marker)
         mapViewLayout.addView(mapView)
 
     }
