@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingTop="15dp"
             android:layout_weight="1">
 
             <TextView
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="지역 설정"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
@@ -61,6 +62,7 @@
             android:paddingBottom="35dp">
 
             <ImageButton
+                android:id="@+id/disableMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -68,6 +70,7 @@
                 android:src="@drawable/ic_accessible_24px_2" />
 
             <ImageButton
+                android:id="@+id/oldManMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -118,6 +121,7 @@
             android:paddingBottom="35dp">
 
             <ImageButton
+                android:id="@+id/lowIncomeMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -125,6 +129,7 @@
                 android:src="@drawable/ic_attach_money_24px" />
 
             <ImageButton
+                android:id="@+id/childHeadMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

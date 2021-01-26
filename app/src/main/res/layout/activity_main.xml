@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:backgroundTint="#EA5454"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="이용 방법"
+            android:text="무료급식소 위치"
             android:textSize="28sp" />
     </LinearLayout>
 
