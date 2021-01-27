@@ -49,7 +49,6 @@ class MainCategory : AppCompatActivity() {
             }
         }
 
-
     }
 
     private fun imageButtonClickListener(location: String){

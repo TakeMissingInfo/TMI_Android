@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class NetworkController: Application() {
 
-    val baseUrl = ""
+    private val baseUrl = "https://326331bd51fe.ngrok.io"
 
     lateinit var networkService: NetworkService
 
@@ -24,10 +24,11 @@ class NetworkController: Application() {
     }
 
     fun buildNetwork(){
-        val retrofit: Retrofit = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(
-            GsonConverterFactory.create()).client(OkHttpClient.Builder().connectTimeout(30,TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS).writeTimeout(30,TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor()).build()).build()
+        val retrofit: Retrofit = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().connectTimeout(30,TimeUnit.SECONDS).readTimeout(30,TimeUnit.SECONDS)
+                .writeTimeout(30,TimeUnit.SECONDS).addInterceptor(HttpLoggingInterceptor()).build()).build()
+
+        //val retrofit : Retrofit = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build()
 
         networkService = retrofit.create(NetworkService::class.java)
     }
