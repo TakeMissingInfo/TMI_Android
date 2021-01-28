@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".SubClass">
 
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="상세 분류"
-        android:textSize="28sp" />
+        android:textSize="26sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,88 +36,118 @@
 
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <ImageButton
+        <androidx.gridlayout.widget.GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            app:orientation="horizontal"
+            app:columnCount="2"
+            app:rowCount="4">
+
+            <Button
                 android:id="@+id/imageButton1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_employment"
+                android:gravity="center|bottom"
+                android:text="취업, 직장"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
-                android:src="@drawable/ic_accessible_24px_2" />
+                android:drawableTop="@drawable/ic_finance"
+                android:gravity="center|bottom"
+                android:text="금융, 세금 법률"
+                android:textSize="18sp" />
 
-            <ImageButton
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_life"
+                android:gravity="center|bottom"
+                android:text="생활, 병역"
+                android:textSize="18sp" />
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <ImageButton
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_medical"
+                android:gravity="center|bottom"
+                android:text="건강, 의료, 사망"
+                android:textSize="18sp" />
 
-            <ImageButton
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="#FFFFFF"
-                android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
+                android:drawableTop="@drawable/ic_housing"
+                android:gravity="center|bottom"
+                android:text="결혼, 육아, 교육"
+                android:textSize="18sp" />
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <ImageButton
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
-            <ImageButton
-                android:layout_width="match_parent"
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_environment"
+                android:gravity="center|bottom"
+                android:text="환경, 재난"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingBottom="10dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
-        </TableRow>
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_house_24px_2"
+                android:gravity="center|bottom"
+                android:text="주택, 부동산"
+                android:textSize="18sp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-
-            <ImageButton
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingBottom="10dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_car"
+                android:gravity="center|bottom"
+                android:text="자동차"
+                android:textSize="18sp" />
 
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
-                android:layout_weight="1"
-                android:src="@drawable/ic_accessible_24px_2"/>
-        </TableRow>
-    </TableLayout>
+        </androidx.gridlayout.widget.GridLayout>
+
+    </ScrollView>
+
 </LinearLayout>

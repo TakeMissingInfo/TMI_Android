@@ -18,17 +18,6 @@ import net.daum.mf.map.api.MapView
 
 class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, MapView.POIItemEventListener {
 
-    init {
-        instance = this
-    }
-
-    companion object {
-        private var instance: SoupKitchenActivity? = null
-        fun context() : Context {
-            return instance!!.applicationContext
-        }
-    }
-
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
 
     }
