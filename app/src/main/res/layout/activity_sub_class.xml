@@ -50,7 +50,7 @@
             app:rowCount="4">
 
             <Button
-                android:id="@+id/imageButton1"
+                android:id="@+id/employmentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -62,6 +62,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/financeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -74,6 +75,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/lifeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -86,6 +88,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/medicalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -98,6 +101,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/parentingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -109,6 +113,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/environmentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -121,6 +126,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/housingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -134,6 +140,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/carButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

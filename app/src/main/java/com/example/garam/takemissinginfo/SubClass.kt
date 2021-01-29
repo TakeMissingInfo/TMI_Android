@@ -3,6 +3,7 @@ package com.example.garam.takemissinginfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.garam.takemissinginfo.network.NetworkController
 import com.example.garam.takemissinginfo.network.NetworkService
@@ -26,19 +27,75 @@ class SubClass : AppCompatActivity() {
         val location = intent.getStringExtra("location")
         Toast.makeText(this,"$menuName , $location", Toast.LENGTH_SHORT).show()
 
-        imageButton1.setOnClickListener {
-            if (!imageButton1.isSelected) {
-                selectedClassTextView.append("취업, 직장")
+        class BtnClick : View.OnClickListener {
+            override fun onClick(v: View) {
+                when(v.id) {
+                    employmentButton.id -> {
+                        selectedClassTextView.append("${employmentButton.text}/")
+                    }
+
+                    financeButton.id -> {
+                        selectedClassTextView.append("${financeButton.text}/")
+                    }
+
+                    lifeButton.id -> {
+                        selectedClassTextView.append("${lifeButton.text}/")
+
+                    }
+
+                    medicalButton.id -> {
+                        selectedClassTextView.append("${medicalButton.text}/")
+
+                    }
+
+                    parentingButton.id -> {
+                        selectedClassTextView.append("${parentingButton.text}/")
+
+                    }
+
+                    environmentButton.id -> {
+                        selectedClassTextView.append("${environmentButton.text}/")
+
+                    }
+
+                    housingButton.id -> {
+                        selectedClassTextView.append("${housingButton.text}/")
+
+                    }
+
+                    carButton.id -> {
+                        selectedClassTextView.append("${carButton.text}/")
+
+                    }
+                }
             }
         }
-        benefit()
+
+        val click = BtnClick()
+
+        employmentButton.setOnClickListener(click)
+        financeButton.setOnClickListener(click)
+        lifeButton.setOnClickListener(click)
+        medicalButton.setOnClickListener(click)
+        parentingButton.setOnClickListener(click)
+        environmentButton.setOnClickListener(click)
+        housingButton.setOnClickListener(click)
+        carButton.setOnClickListener(click)
+
+        benefit(menuName)
+
+
 
     }
 
-    private fun benefit(){
+
+
+
+
+    private fun benefit(type: String?){
 
         val testArray  = arrayOf("LIFE")
-        networkService.benefitsRequest("DISABLE",testArray).enqueue(object : Callback<JsonObject>{
+        networkService.benefitsRequest(type.toString(),testArray).enqueue(object : Callback<JsonObject>{
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 
