@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_sub_class.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SubClass : AppCompatActivity() {
 
@@ -27,43 +29,53 @@ class SubClass : AppCompatActivity() {
         val location = intent.getStringExtra("location")
         Toast.makeText(this,"$menuName , $location", Toast.LENGTH_SHORT).show()
 
+        val benefitArray = ArrayList<String> ()
+
         class BtnClick : View.OnClickListener {
             override fun onClick(v: View) {
                 when(v.id) {
                     employmentButton.id -> {
+                        benefitArray.add("EMPLOYMENT")
                         selectedClassTextView.append("${employmentButton.text}/")
                     }
 
                     financeButton.id -> {
+                        benefitArray.add("FINANCE")
                         selectedClassTextView.append("${financeButton.text}/")
                     }
 
                     lifeButton.id -> {
+                        benefitArray.add("LIFE")
                         selectedClassTextView.append("${lifeButton.text}/")
 
                     }
 
                     medicalButton.id -> {
+                        benefitArray.add("MEDICAL_CARE")
                         selectedClassTextView.append("${medicalButton.text}/")
 
                     }
 
                     parentingButton.id -> {
+                        benefitArray.add("MARRIAGE_PARENTING")
                         selectedClassTextView.append("${parentingButton.text}/")
 
                     }
 
                     environmentButton.id -> {
+                        benefitArray.add("ENVIRONMENTAL_DISASTER")
                         selectedClassTextView.append("${environmentButton.text}/")
 
                     }
 
                     housingButton.id -> {
+                        benefitArray.add("HOUSING")
                         selectedClassTextView.append("${housingButton.text}/")
 
                     }
 
                     carButton.id -> {
+                        benefitArray.add("MOTOR_TRAFFIC")
                         selectedClassTextView.append("${carButton.text}/")
 
                     }
@@ -82,20 +94,18 @@ class SubClass : AppCompatActivity() {
         housingButton.setOnClickListener(click)
         carButton.setOnClickListener(click)
 
-        benefit(menuName)
+        selectButton.setOnClickListener {
+            Log.e("benefit", benefitArray.toString())
+            benefit(menuName, benefitArray)
+        }
 
 
 
     }
 
+    private fun benefit(type: String?, benefitType: ArrayList<String>){
 
-
-
-
-    private fun benefit(type: String?){
-
-        val testArray  = arrayOf("LIFE")
-        networkService.benefitsRequest(type.toString(),testArray).enqueue(object : Callback<JsonObject>{
+        networkService.benefitsRequest(type.toString(),benefitType).enqueue(object : Callback<JsonObject>{
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 

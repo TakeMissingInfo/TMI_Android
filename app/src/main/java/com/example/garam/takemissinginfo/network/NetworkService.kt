@@ -9,7 +9,7 @@ interface NetworkService {
     @GET("/api/v1/weakperson/{type}")
     fun benefitsRequest(
         @Path ("type") type: String,
-        @Query ("benefitType") benefitType : Array<String>
+        @Query ("benefitType") benefitType : ArrayList<String>
     ) : Call<JsonObject>
 
 }

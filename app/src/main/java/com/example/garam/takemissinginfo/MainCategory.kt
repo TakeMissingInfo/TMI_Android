@@ -53,19 +53,19 @@ class MainCategory : AppCompatActivity() {
 
     private fun imageButtonClickListener(location: String){
         disableMenu.setOnClickListener {
-            nextIntent("장애인",location)
+            nextIntent("DISABLE",location)
         }
 
         oldManMenu.setOnClickListener {
-            nextIntent("노인",location)
+            nextIntent("OLD_MAN",location)
         }
 
         lowIncomeMenu.setOnClickListener {
-            nextIntent("저소득층",location)
+            nextIntent("LOW_INCOME",location)
         }
 
         childHeadMenu.setOnClickListener {
-            nextIntent("소년소녀 가장",location)
+            nextIntent("BOYS_GIRLS_FAMILY",location)
         }
 
     }
