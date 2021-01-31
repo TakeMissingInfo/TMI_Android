@@ -35,49 +35,92 @@ class SubClass : AppCompatActivity() {
             override fun onClick(v: View) {
                 when(v.id) {
                     employmentButton.id -> {
-                        benefitArray.add("EMPLOYMENT")
-                        selectedClassTextView.append("${employmentButton.text}/")
+                        if (employmentButton.isSelected) {
+                            benefitArray.remove("EMPLOYMENT")
+                           // selectedClassTextView.text = benefitArray.toString()
+                            employmentButton.isSelected = false
+                        } else {
+                            benefitArray.add("EMPLOYMENT")
+                            selectedClassTextView.append("${employmentButton.text}/")
+                            employmentButton.isSelected = true
+                        }
                     }
 
                     financeButton.id -> {
-                        benefitArray.add("FINANCE")
-                        selectedClassTextView.append("${financeButton.text}/")
+                        if (financeButton.isSelected) {
+                            benefitArray.remove("FINANCE")
+                            financeButton.isSelected = false
+                        } else {
+                            benefitArray.add("FINANCE")
+                            selectedClassTextView.append("${financeButton.text}/")
+                            financeButton.isSelected = true
+                        }
                     }
 
                     lifeButton.id -> {
-                        benefitArray.add("LIFE")
-                        selectedClassTextView.append("${lifeButton.text}/")
-
+                        if (lifeButton.isSelected){
+                            benefitArray.remove("LIFE")
+                            lifeButton.isSelected = false
+                        } else {
+                            benefitArray.add("LIFE")
+                            selectedClassTextView.append("${lifeButton.text}/")
+                            lifeButton.isSelected = true
+                        }
                     }
 
                     medicalButton.id -> {
-                        benefitArray.add("MEDICAL_CARE")
-                        selectedClassTextView.append("${medicalButton.text}/")
-
+                        if (medicalButton.isSelected) {
+                            benefitArray.remove("MEDICAL_CARE")
+                            medicalButton.isSelected = false
+                        } else {
+                            benefitArray.add("MEDICAL_CARE")
+                            selectedClassTextView.append("${medicalButton.text}/")
+                            medicalButton.isSelected = true
+                        }
                     }
 
                     parentingButton.id -> {
-                        benefitArray.add("MARRIAGE_PARENTING")
-                        selectedClassTextView.append("${parentingButton.text}/")
-
+                        if (parentingButton.isSelected) {
+                            benefitArray.remove("MARRIAGE_PARENTING")
+                            parentingButton.isSelected = false
+                        } else {
+                            benefitArray.add("MARRIAGE_PARENTING")
+                            selectedClassTextView.append("${parentingButton.text}/")
+                            parentingButton.isSelected = true
+                        }
                     }
 
                     environmentButton.id -> {
-                        benefitArray.add("ENVIRONMENTAL_DISASTER")
-                        selectedClassTextView.append("${environmentButton.text}/")
-
+                        if (environmentButton.isSelected) {
+                            benefitArray.remove("ENVIRONMENTAL_DISASTER")
+                            environmentButton.isSelected = false
+                        } else {
+                            benefitArray.add("ENVIRONMENTAL_DISASTER")
+                            selectedClassTextView.append("${environmentButton.text}/")
+                            environmentButton.isSelected = true
+                        }
                     }
 
                     housingButton.id -> {
-                        benefitArray.add("HOUSING")
-                        selectedClassTextView.append("${housingButton.text}/")
-
+                        if (housingButton.isSelected) {
+                            benefitArray.remove("HOUSING")
+                            housingButton.isSelected = false
+                        } else {
+                            benefitArray.add("HOUSING")
+                            selectedClassTextView.append("${housingButton.text}/")
+                            housingButton.isSelected = true
+                        }
                     }
 
                     carButton.id -> {
-                        benefitArray.add("MOTOR_TRAFFIC")
-                        selectedClassTextView.append("${carButton.text}/")
-
+                        if (carButton.isSelected){
+                            benefitArray.remove("MOTOR_TRAFFIC")
+                            carButton.isSelected = false
+                        } else {
+                            benefitArray.add("MOTOR_TRAFFIC")
+                            selectedClassTextView.append("${carButton.text}/")
+                            carButton.isSelected = true
+                        }
                     }
                 }
             }
@@ -95,12 +138,8 @@ class SubClass : AppCompatActivity() {
         carButton.setOnClickListener(click)
 
         selectButton.setOnClickListener {
-            Log.e("benefit", benefitArray.toString())
             benefit(menuName, benefitArray)
         }
-
-
-
     }
 
     private fun benefit(type: String?, benefitType: ArrayList<String>){
