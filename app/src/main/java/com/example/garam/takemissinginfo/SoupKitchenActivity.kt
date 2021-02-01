@@ -7,16 +7,26 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.LocationManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.garam.takemissinginfo.network.NetworkController
+import com.example.garam.takemissinginfo.network.NetworkService
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_soup_kitchen.*
 import net.daum.mf.map.api.MapCircle
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, MapView.POIItemEventListener {
+
+    private val networkService : NetworkService by lazy{
+        NetworkController.instance.networkService
+    }
 
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
 
@@ -89,37 +99,63 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
         val locationManager : LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val location = if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                this, Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                this, Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION),
-                100)
-            return
-        } else locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                Manifest.permission.ACCESS_COARSE_LOCATION), 100)
+            return } else locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
         val latitude = location.latitude
         val longitude = location.longitude
 
+        soupKitchenMarker(latitude,longitude,mapView)
+
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
-        val circle = MapCircle(MapPoint.mapPointWithGeoCoord(latitude,longitude),500,
+        val circle = MapCircle(MapPoint.mapPointWithGeoCoord(latitude,longitude),1000,
         Color.argb(128,255,0,0),
         Color.argb(128,0,255,0))
 
         mapView.addCircle(circle)
 
-        val marker = MapPOIItem()
-        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude + 0.3,longitude + 0.3)
-        marker.itemName = "테스트"
-        mapView.addPOIItem(marker)
         mapViewLayout.addView(mapView)
 
+    }
+
+    private fun soupKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
+        networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()!!.asJsonObject
+                    val data = responseBody["data"].asJsonArray
+
+
+                    for ( i in 0 until data.size()){
+                        val facilityName = data[i].asJsonObject["facilityName"].asString
+                        val address = data[i].asJsonObject["address"].asString
+   //                     val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
+   //                     val operatingTime = data[i].asJsonObject["operatingTime"].asString
+//                        val operatingDate = data[i].asJsonObject["operatingDate"].asString
+                        val latitude = data[i].asJsonObject["latitude"].asDouble
+                        val longitude = data[i].asJsonObject["longitude"].asDouble
+
+                        val marker = MapPOIItem()
+                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
+                        marker.itemName = facilityName
+                        mapView.addPOIItem(marker)
+                    }
+
+                }
+            }
+        })
     }
 
 }
