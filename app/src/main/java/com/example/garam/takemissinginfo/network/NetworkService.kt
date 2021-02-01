@@ -12,4 +12,11 @@ interface NetworkService {
         @Query ("benefitType") benefitType : ArrayList<String>
     ) : Call<JsonObject>
 
+    @POST("/api/v1/weakperson/renew")
+    fun benefitRenewal(
+        @Body renewRequest : JsonObject
+    ) : Call<JsonObject>
+
+
+
 }
