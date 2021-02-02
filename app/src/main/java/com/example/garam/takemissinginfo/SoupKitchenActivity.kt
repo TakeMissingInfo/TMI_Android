@@ -1,23 +1,28 @@
 package com.example.garam.takemissinginfo
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.garam.takemissinginfo.network.NetworkController
 import com.example.garam.takemissinginfo.network.NetworkService
 import com.google.gson.JsonObject
+import com.google.gson.JsonParseException
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_soup_kitchen.*
-import net.daum.mf.map.api.MapCircle
+import kotlinx.android.synthetic.main.detail_info_layout.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +32,8 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
     private val networkService : NetworkService by lazy{
         NetworkController.instance.networkService
     }
+
+    private lateinit var dialog: Dialog
 
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
 
@@ -73,11 +80,10 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         p1: MapPOIItem?,
         p2: MapPOIItem.CalloutBalloonButtonType?
     ) {
-        val url = "https://map.kakao.com/link/to/${p1?.itemName},${p1?.mapPoint?.mapPointGeoCoord?.latitude}, ${p1?.mapPoint?.mapPointGeoCoord?.longitude}"
-        val nextIntent = Intent(Intent.ACTION_VIEW,Uri.parse(url))
-        nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val detailInfo = JsonParser().parse(p1?.userObject.toString()).asJsonObject
 
-        startActivity(nextIntent)
+        showDialog(detailInfo,p1?.itemName.toString(),
+            p1?.mapPoint?.mapPointGeoCoord?.latitude!!,p1.mapPoint.mapPointGeoCoord.longitude)
 
     }
 
@@ -97,6 +103,10 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         mapView.setMapViewEventListener(this)
         mapView.setPOIItemEventListener(this)
 
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.detail_info_layout)
+
         val locationManager : LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val location = if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION
@@ -111,16 +121,11 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         val latitude = location.latitude
         val longitude = location.longitude
 
-        soupKitchenMarker(latitude,longitude,mapView)
-
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
-        val circle = MapCircle(MapPoint.mapPointWithGeoCoord(latitude,longitude),1000,
-        Color.argb(128,255,0,0),
-        Color.argb(128,0,255,0))
-
-        mapView.addCircle(circle)
+        wholeSoupKitchenButton.setOnClickListener { soupKitchenMarker(latitude,longitude,mapView) }
+        nearBySoupKitchenButton.setOnClickListener {  }
 
         mapViewLayout.addView(mapView)
 
@@ -137,25 +142,64 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                     val responseBody = response.body()!!.asJsonObject
                     val data = responseBody["data"].asJsonArray
 
-
                     for ( i in 0 until data.size()){
                         val facilityName = data[i].asJsonObject["facilityName"].asString
                         val address = data[i].asJsonObject["address"].asString
-   //                     val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
-   //                     val operatingTime = data[i].asJsonObject["operatingTime"].asString
+//                        val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
+//                        val operatingTime = data[i].asJsonObject["operatingTime"].asString
 //                        val operatingDate = data[i].asJsonObject["operatingDate"].asString
+
+                        val phoneNumber = "TestNum"
+                        val operatingTime = "TestTime"
+                        val operatingDate = "TestDate"
+
                         val latitude = data[i].asJsonObject["latitude"].asDouble
                         val longitude = data[i].asJsonObject["longitude"].asDouble
+
+                        val soupKitchenDataObject = JSONObject()
+                        soupKitchenDataObject.put("facilityName",facilityName)
+                        soupKitchenDataObject.put("address",address)
+                        soupKitchenDataObject.put("phoneNumber",phoneNumber)
+                        soupKitchenDataObject.put("operatingTime",operatingTime)
+                        soupKitchenDataObject.put("operatingDate",operatingDate)
+                        soupKitchenDataObject.put("latitude",latitude)
+                        soupKitchenDataObject.put("longitude",longitude)
+
 
                         val marker = MapPOIItem()
                         marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
                         marker.itemName = facilityName
+                        marker.userObject = soupKitchenDataObject
+                        marker.customCalloutBalloon
                         mapView.addPOIItem(marker)
                     }
-
                 }
             }
         })
+    }
+
+    private fun showDialog(infoObject: JsonObject, itemName: String, latitude: Double, longitude: Double){
+
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
+
+        dialog.addressTextView.text = infoObject["address"].asString
+        dialog.phoneNumberTextView.text = infoObject["phoneNumber"].asString
+        dialog.operationDateTextView.text = infoObject["operatingDate"].asString
+        dialog.operationTimeTextView.text = infoObject["operatingTime"].asString
+
+        dialog.roadFindButton.setOnClickListener {
+
+            val url = "https://map.kakao.com/link/to/$itemName,$latitude,$longitude"
+            val nextIntent = Intent(Intent.ACTION_VIEW,Uri.parse(url))
+            nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+            startActivity(nextIntent)
+        }
+
+        dialog.dialogCloseButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
 }

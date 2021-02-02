@@ -25,16 +25,16 @@ class MainCategory : AppCompatActivity() {
             AdapterView.OnItemClickListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when(p2){
-                    0 -> location = "서울특별시"
-                    1 -> location = "경기도"
-                    2 -> location = "부산광역시"
-                    3 -> location = "대전광역시"
-                    4 -> location = "대구광역시"
-                    5 -> location = "광주광역시"
-                    6 -> location = "경상남도"
-                    7 -> location = "경상북도"
-                    8 -> location = "강원도"
-                    9 -> location = "세종특별자치시"
+                    0 -> location = items[0]
+                    1 -> location = items[1]
+                    2 -> location = items[2]
+                    3 -> location = items[3]
+                    4 -> location = items[4]
+                    5 -> location = items[5]
+                    6 -> location = items[6]
+                    7 -> location = items[7]
+                    8 -> location = items[8]
+                    9 -> location = items[9]
                 }
                 imageButtonClickListener(location)
 
