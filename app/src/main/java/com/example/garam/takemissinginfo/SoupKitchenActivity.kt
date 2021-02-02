@@ -124,14 +124,70 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,longitude),2, true)
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
-        wholeSoupKitchenButton.setOnClickListener { soupKitchenMarker(latitude,longitude,mapView) }
-        nearBySoupKitchenButton.setOnClickListener {  }
+        wholeSoupKitchenButton.setOnClickListener {
+            mapView.removeAllPOIItems()
+            soupKitchenMarker(latitude,longitude,mapView)
+        }
+
+        nearBySoupKitchenButton.setOnClickListener {
+            mapView.removeAllPOIItems()
+            nearByKitchenMarker(latitude,longitude,mapView)
+        }
 
         mapViewLayout.addView(mapView)
 
     }
 
+    private fun nearByKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
+
+        networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()!!.asJsonObject
+                    val data = responseBody["data"].asJsonArray
+
+                    for ( i in 0 until 5){
+                        val facilityName = data[i].asJsonObject["facilityName"].asString
+                        val address = data[i].asJsonObject["address"].asString
+//                        val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
+//                        val operatingTime = data[i].asJsonObject["operatingTime"].asString
+//                        val operatingDate = data[i].asJsonObject["operatingDate"].asString
+
+                        val phoneNumber = "TestNum"
+                        val operatingTime = "TestTime"
+                        val operatingDate = "TestDate"
+
+                        val latitude = data[i].asJsonObject["latitude"].asDouble
+                        val longitude = data[i].asJsonObject["longitude"].asDouble
+
+                        val soupKitchenDataObject = JSONObject()
+                        soupKitchenDataObject.put("facilityName",facilityName)
+                        soupKitchenDataObject.put("address",address)
+                        soupKitchenDataObject.put("phoneNumber",phoneNumber)
+                        soupKitchenDataObject.put("operatingTime",operatingTime)
+                        soupKitchenDataObject.put("operatingDate",operatingDate)
+                        soupKitchenDataObject.put("latitude",latitude)
+                        soupKitchenDataObject.put("longitude",longitude)
+
+                        val marker = MapPOIItem()
+                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
+                        marker.itemName = facilityName
+                        marker.userObject = soupKitchenDataObject
+                        marker.customCalloutBalloon
+                        mapView.addPOIItem(marker)
+                    }
+                }
+            }
+        })
+    }
+
+
     private fun soupKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
+
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 

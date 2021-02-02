@@ -154,8 +154,6 @@ class SubClass : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val res = response.body()
 
-                    Log.e("테스트",res.toString())
-
                 }
             }
         })

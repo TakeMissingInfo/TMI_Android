@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class NetworkController: Application() {
 
-    private val baseUrl = "https://2d9d8f0f8ab2.ngrok.io"
+    private val baseUrl = "https://f293cc58922c.ngrok.io"
 
     lateinit var networkService: NetworkService
 
