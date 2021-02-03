@@ -1,5 +1,6 @@
 package com.example.garam.takemissinginfo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,9 +35,12 @@ class BenefitInfoActivity : AppCompatActivity() {
         val recycler = findViewById<RecyclerView>(R.id.benefitRecycler)
 
         benefitRecycler = BenefitRecyclerViewAdapter(lists,this){
-            BenefitInfoData -> {
+            BenefitInfoData ->
 
-        }
+            val nextIntent = Intent(this,BenefitWebViewActivity::class.java)
+            nextIntent.putExtra("detailUrl",BenefitInfoData.detailsInfoUrl)
+            startActivity(nextIntent)
+
         }
 
         recycler.adapter = benefitRecycler
@@ -64,7 +68,7 @@ class BenefitInfoActivity : AppCompatActivity() {
                         val competentInstitution =
                             data[i]?.asJsonObject?.get("competentInstitution")?.asString.toString()
                         val detailsInfo = data[i]?.asJsonObject?.get("detailsInfo")?.asString.toString()
-                        val detailsInfoUrl = data[i]?.asJsonObject?.get("detailsInfo")?.asString.toString()
+                        val detailsInfoUrl = data[i]?.asJsonObject?.get("detailsInfoUrl")?.asString.toString()
                         val benefitName = data[i]?.asJsonObject?.get("name")?.asString.toString()
                         val supportForm = data[i]?.asJsonObject?.get("supportForm")?.asString.toString()
 
