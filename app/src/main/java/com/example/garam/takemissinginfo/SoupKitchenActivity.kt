@@ -195,15 +195,15 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    val responseBody = response.body()!!.asJsonObject
-                    val data = responseBody["data"].asJsonArray
+                    val responseBody = response.body()!!
+                    val data = responseBody.get("data").asJsonArray
 
                     for ( i in 0 until data.size()){
-                        val facilityName = data[i].asJsonObject["facilityName"].asString
-                        val address = data[i].asJsonObject["address"].asString
-//                        val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
-//                        val operatingTime = data[i].asJsonObject["operatingTime"].asString
-//                        val operatingDate = data[i].asJsonObject["operatingDate"].asString
+                        val facilityName = data[i].asJsonObject?.get("facilityName")?.asString
+                        val address = data[i]?.asJsonObject?.get("address")?.asString
+//                        val phoneNumber = data[i]?.asJsonObject?.get("phoneNumber")?.asString
+//                        val operatingTime = data[i]?.asJsonObject?.get("operatingTime")?.asString
+//                        val operatingDate = data[i]?.asJsonObject?.get("operatingDate")?.asString
 
                         val phoneNumber = "TestNum"
                         val operatingTime = "TestTime"

@@ -1,5 +1,6 @@
 package com.example.garam.takemissinginfo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -138,7 +139,12 @@ class SubClass : AppCompatActivity() {
         carButton.setOnClickListener(click)
 
         selectButton.setOnClickListener {
-            benefit(menuName, benefitArray)
+
+            val nextIntent = Intent(this, BenefitInfoActivity::class.java)
+            nextIntent.putExtra("type",menuName)
+            nextIntent.putExtra("benefitType", benefitArray)
+            startActivity(nextIntent)
+ //           benefit(menuName, benefitArray)
         }
     }
 
