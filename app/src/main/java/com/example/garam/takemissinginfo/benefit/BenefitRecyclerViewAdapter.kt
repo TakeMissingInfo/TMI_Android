@@ -1,4 +1,4 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.garam.takemissinginfo.R
 
 class BenefitRecyclerViewAdapter(
     private val items: ArrayList<BenefitInfoData>,
@@ -15,7 +16,7 @@ class BenefitRecyclerViewAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BenefitRecyclerViewAdapter.ViewHolder {
+    ): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.benefit_info_recyclerview_layout,parent,false),
         itemClick)
     }
@@ -24,7 +25,7 @@ class BenefitRecyclerViewAdapter(
         return items.size
     }
 
-    override fun onBindViewHolder(holder: BenefitRecyclerViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

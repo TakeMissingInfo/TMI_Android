@@ -1,10 +1,11 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.garam.takemissinginfo.R
 import com.example.garam.takemissinginfo.network.NetworkController
 import com.example.garam.takemissinginfo.network.NetworkService
 import com.google.gson.JsonObject
@@ -34,14 +35,20 @@ class BenefitInfoActivity : AppCompatActivity() {
 
         val recycler = findViewById<RecyclerView>(R.id.benefitRecycler)
 
-        benefitRecycler = BenefitRecyclerViewAdapter(lists,this){
-            BenefitInfoData ->
+        benefitRecycler =
+            BenefitRecyclerViewAdapter(
+                lists,
+                this
+            ) { BenefitInfoData ->
 
-            val nextIntent = Intent(this,BenefitWebViewActivity::class.java)
-            nextIntent.putExtra("detailUrl",BenefitInfoData.detailsInfoUrl)
-            startActivity(nextIntent)
+                val nextIntent = Intent(
+                    this,
+                    BenefitWebViewActivity::class.java
+                )
+                nextIntent.putExtra("detailUrl", BenefitInfoData.detailsInfoUrl)
+                startActivity(nextIntent)
 
-        }
+            }
 
         recycler.adapter = benefitRecycler
         recycler.layoutManager = LinearLayoutManager(this)

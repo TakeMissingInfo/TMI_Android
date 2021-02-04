@@ -1,11 +1,11 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.garam.takemissinginfo.R
 import com.example.garam.takemissinginfo.network.NetworkController
 import com.example.garam.takemissinginfo.network.NetworkService
 import com.google.gson.JsonObject
@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_sub_class.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SubClass : AppCompatActivity() {

@@ -199,20 +199,25 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                     val data = responseBody.get("data").asJsonArray
 
                     for ( i in 0 until data.size()){
-                        val facilityName = data[i].asJsonObject?.get("facilityName")?.asString
-                        val address = data[i]?.asJsonObject?.get("address")?.asString
-//                        val phoneNumber = data[i]?.asJsonObject?.get("phoneNumber")?.asString
-//                        val operatingTime = data[i]?.asJsonObject?.get("operatingTime")?.asString
-//                        val operatingDate = data[i]?.asJsonObject?.get("operatingDate")?.asString
 
-                        val phoneNumber = "TestNum"
-                        val operatingTime = "TestTime"
-                        val operatingDate = "TestDate"
+                        val dataObject = data[i].asJsonObject
+                        val facilityName = dataObject["facilityName"].asString
+                        val address = dataObject["address"].asString
 
-                        val latitude = data[i].asJsonObject["latitude"].asDouble
-                        val longitude = data[i].asJsonObject["longitude"].asDouble
+                        val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
+                        else dataObject["phoneNumber"].asString
+
+                        val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
+                        else dataObject["operatingTime"].asString
+
+                        val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
+                        else dataObject["operatingDate"].asString
+
+                        val latitude = dataObject["latitude"].asDouble
+                        val longitude = dataObject["longitude"].asDouble
 
                         val soupKitchenDataObject = JSONObject()
+
                         soupKitchenDataObject.put("facilityName",facilityName)
                         soupKitchenDataObject.put("address",address)
                         soupKitchenDataObject.put("phoneNumber",phoneNumber)
@@ -220,7 +225,6 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                         soupKitchenDataObject.put("operatingDate",operatingDate)
                         soupKitchenDataObject.put("latitude",latitude)
                         soupKitchenDataObject.put("longitude",longitude)
-
 
                         val marker = MapPOIItem()
                         marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)

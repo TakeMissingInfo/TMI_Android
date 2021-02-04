@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.example.garam.takemissinginfo.benefit.MainCategory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,8 @@ class MainActivity : AppCompatActivity() {
         var nextIntent : Intent
 
         benefitButton.setOnClickListener {
-            nextIntent = Intent(this,MainCategory::class.java)
+            nextIntent = Intent(this,
+                MainCategory::class.java)
             startActivity(nextIntent)
         }
 

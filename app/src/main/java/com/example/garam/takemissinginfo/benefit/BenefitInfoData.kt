@@ -1,4 +1,4 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 data class BenefitInfoData (
     val competentInstitution : String,

@@ -1,12 +1,12 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.garam.takemissinginfo.R
 import kotlinx.android.synthetic.main.activity_main_category.*
 
 class MainCategory : AppCompatActivity() {
@@ -71,7 +71,8 @@ class MainCategory : AppCompatActivity() {
     }
 
     private fun nextIntent(menuName: String,location: String){
-        val nextIntent = Intent(this,SubClass::class.java)
+        val nextIntent = Intent(this,
+            SubClass::class.java)
         nextIntent.putExtra("menuName",menuName)
         nextIntent.putExtra("location",location)
         startActivity(nextIntent)

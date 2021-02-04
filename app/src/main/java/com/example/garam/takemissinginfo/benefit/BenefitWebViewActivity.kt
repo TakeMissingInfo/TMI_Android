@@ -1,10 +1,9 @@
-package com.example.garam.takemissinginfo
+package com.example.garam.takemissinginfo.benefit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.example.garam.takemissinginfo.R
 import kotlinx.android.synthetic.main.activity_benefit_web_view.*
 
 class BenefitWebViewActivity : AppCompatActivity() {
