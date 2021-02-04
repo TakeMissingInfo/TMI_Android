@@ -1,25 +1,17 @@
 package com.example.garam.takemissinginfo.benefit
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.garam.takemissinginfo.R
-import com.example.garam.takemissinginfo.network.NetworkController
-import com.example.garam.takemissinginfo.network.NetworkService
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_sub_class.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.collections.ArrayList
+import kotlin.reflect.typeOf
 
 class SubClass : AppCompatActivity() {
-
-    private val networkService: NetworkService by lazy {
-        NetworkController.instance.networkService
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,96 +22,152 @@ class SubClass : AppCompatActivity() {
         Toast.makeText(this,"$menuName , $location", Toast.LENGTH_SHORT).show()
 
         val benefitArray = ArrayList<String> ()
+        val testArray = HashMap<String,String> ()
 
         class BtnClick : View.OnClickListener {
             override fun onClick(v: View) {
                 when(v.id) {
                     employmentButton.id -> {
-                        if (employmentButton.isSelected) {
-                            benefitArray.remove("EMPLOYMENT")
-                           // selectedClassTextView.text = benefitArray.toString()
-                            employmentButton.isSelected = false
-                        } else {
+                        if (!employmentButton.isSelected) {
+
                             benefitArray.add("EMPLOYMENT")
-                            selectedClassTextView.append("${employmentButton.text}/")
+                            testArray["EMPLOYMENT"] = "${employmentButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             employmentButton.isSelected = true
+
+                        } else if (employmentButton.isSelected) {
+
+                            benefitArray.remove("EMPLOYMENT")
+                            testArray.remove("EMPLOYMENT")
+                            selectedClassTextView.text = testArray.values.toString()
+                            employmentButton.isSelected = false
+
                         }
                     }
 
                     financeButton.id -> {
-                        if (financeButton.isSelected) {
-                            benefitArray.remove("FINANCE")
-                            financeButton.isSelected = false
-                        } else {
+                        if (!financeButton.isSelected) {
+
                             benefitArray.add("FINANCE")
-                            selectedClassTextView.append("${financeButton.text}/")
+                            testArray["FINANCE"] = "${financeButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             financeButton.isSelected = true
+
+                        } else if (financeButton.isSelected) {
+
+                            benefitArray.remove("FINANCE")
+                            testArray.remove("FINANCE")
+                            selectedClassTextView.text = testArray.values.toString()
+                            financeButton.isSelected = false
+
                         }
                     }
 
                     lifeButton.id -> {
-                        if (lifeButton.isSelected){
-                            benefitArray.remove("LIFE")
-                            lifeButton.isSelected = false
-                        } else {
+                        if (!lifeButton.isSelected) {
+
                             benefitArray.add("LIFE")
-                            selectedClassTextView.append("${lifeButton.text}/")
+                            testArray["LIFE"] = "${lifeButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             lifeButton.isSelected = true
+
+                        } else if (lifeButton.isSelected) {
+
+                            benefitArray.remove("LIFE")
+                            testArray.remove("LIFE")
+                            selectedClassTextView.text = testArray.values.toString()
+                            lifeButton.isSelected = false
+
                         }
                     }
 
                     medicalButton.id -> {
-                        if (medicalButton.isSelected) {
-                            benefitArray.remove("MEDICAL_CARE")
-                            medicalButton.isSelected = false
-                        } else {
+                        if (!medicalButton.isSelected) {
+
                             benefitArray.add("MEDICAL_CARE")
-                            selectedClassTextView.append("${medicalButton.text}/")
+                            testArray["MEDICAL_CARE"] = "${medicalButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             medicalButton.isSelected = true
+
+                        } else if (medicalButton.isSelected){
+
+                            benefitArray.remove("MEDICAL_CARE")
+                            testArray.remove("MEDICAL_CARE")
+                            selectedClassTextView.text = testArray.values.toString()
+                            medicalButton.isSelected = false
+
                         }
                     }
 
                     parentingButton.id -> {
-                        if (parentingButton.isSelected) {
-                            benefitArray.remove("MARRIAGE_PARENTING")
-                            parentingButton.isSelected = false
-                        } else {
+                        if (!parentingButton.isSelected) {
+
                             benefitArray.add("MARRIAGE_PARENTING")
-                            selectedClassTextView.append("${parentingButton.text}/")
+                            testArray["MARRIAGE_PARENTING"] = "${parentingButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             parentingButton.isSelected = true
+
+                        } else if(parentingButton.isSelected){
+
+                            benefitArray.remove("MARRIAGE_PARENTING")
+                            testArray.remove("MARRIAGE_PARENTING")
+                            selectedClassTextView.text = testArray.values.toString()
+                            parentingButton.isSelected = false
+
                         }
                     }
 
                     environmentButton.id -> {
-                        if (environmentButton.isSelected) {
-                            benefitArray.remove("ENVIRONMENTAL_DISASTER")
-                            environmentButton.isSelected = false
-                        } else {
+                        if (!environmentButton.isSelected) {
+
                             benefitArray.add("ENVIRONMENTAL_DISASTER")
-                            selectedClassTextView.append("${environmentButton.text}/")
+                            testArray["ENVIRONMENTAL_DISASTER"] = "${environmentButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             environmentButton.isSelected = true
+
+                        } else if (environmentButton.isSelected){
+
+                            benefitArray.remove("ENVIRONMENTAL_DISASTER")
+                            testArray.remove("ENVIRONMENTAL_DISASTER")
+                            selectedClassTextView.text = testArray.values.toString()
+                            environmentButton.isSelected = false
+
                         }
                     }
 
                     housingButton.id -> {
-                        if (housingButton.isSelected) {
-                            benefitArray.remove("HOUSING")
-                            housingButton.isSelected = false
-                        } else {
+                        if (!housingButton.isSelected) {
+
                             benefitArray.add("HOUSING")
-                            selectedClassTextView.append("${housingButton.text}/")
+                            testArray["HOUSING"] = "${housingButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             housingButton.isSelected = true
+
+                        } else if (housingButton.isSelected){
+
+                            benefitArray.remove("HOUSING")
+                            testArray.remove("HOUSING")
+                            selectedClassTextView.text = testArray.values.toString()
+                            housingButton.isSelected = false
+
                         }
                     }
 
                     carButton.id -> {
-                        if (carButton.isSelected){
-                            benefitArray.remove("MOTOR_TRAFFIC")
-                            carButton.isSelected = false
-                        } else {
+
+                        if (!carButton.isSelected){
+
                             benefitArray.add("MOTOR_TRAFFIC")
-                            selectedClassTextView.append("${carButton.text}/")
+                            testArray["MOTOR_TRAFFIC"] = "${carButton.text}"
+                            selectedClassTextView.text = testArray.values.toString()
                             carButton.isSelected = true
+
+                        } else {
+
+                            benefitArray.remove("MOTOR_TRAFFIC")
+                            testArray.remove("MOTOR_TRAFFIC")
+                            selectedClassTextView.text = testArray.values.toString()
+                            carButton.isSelected = false
                         }
                     }
                 }
@@ -142,25 +190,10 @@ class SubClass : AppCompatActivity() {
             val nextIntent = Intent(this, BenefitInfoActivity::class.java)
             nextIntent.putExtra("type",menuName)
             nextIntent.putExtra("benefitType", benefitArray)
+            nextIntent.putExtra("testType",testArray)
+            Log.e("???","${testArray.keys}")
             startActivity(nextIntent)
- //           benefit(menuName, benefitArray)
         }
     }
 
-    private fun benefit(type: String?, benefitType: ArrayList<String>){
-
-        networkService.benefitsRequest(type.toString(),benefitType).enqueue(object : Callback<JsonObject>{
-
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-            }
-
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-
-                }
-            }
-        })
-    }
 }

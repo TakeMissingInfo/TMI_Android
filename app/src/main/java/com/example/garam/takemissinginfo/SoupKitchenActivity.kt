@@ -8,14 +8,12 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.garam.takemissinginfo.network.NetworkController
 import com.example.garam.takemissinginfo.network.NetworkService
 import com.google.gson.JsonObject
-import com.google.gson.JsonParseException
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_soup_kitchen.*
 import kotlinx.android.synthetic.main.detail_info_layout.*

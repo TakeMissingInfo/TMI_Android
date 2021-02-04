@@ -3,6 +3,7 @@ package com.example.garam.takemissinginfo.benefit
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.garam.takemissinginfo.R
@@ -31,7 +32,12 @@ class BenefitInfoActivity : AppCompatActivity() {
         val type = intent.getStringExtra("type")
         val benefitType = intent.getStringArrayListExtra("benefitType")
 
-        benefit(type,benefitType)
+        val testType = intent.getSerializableExtra("testType")
+        val testBenefitType = testType as HashMap<*, *>
+        Log.e("테스트", testBenefitType.keys.toString())
+        Log.e("222","$benefitType")
+
+        benefit(type, benefitType)
 
         val recycler = findViewById<RecyclerView>(R.id.benefitRecycler)
 
@@ -54,7 +60,6 @@ class BenefitInfoActivity : AppCompatActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
     }
-
 
     private fun benefit(type: String?, benefitType: ArrayList<String>){
 
