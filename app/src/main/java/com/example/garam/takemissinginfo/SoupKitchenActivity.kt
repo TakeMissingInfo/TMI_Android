@@ -9,6 +9,7 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.garam.takemissinginfo.network.NetworkController
@@ -138,9 +139,11 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
     private fun nearByKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
 
+        val failMessage = Toast.makeText(this,"조회에 실패했습니다", Toast.LENGTH_SHORT)
+
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
+                failMessage.show()
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -149,19 +152,22 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                     val data = responseBody["data"].asJsonArray
 
                     for ( i in 0 until 5){
-                        val facilityName = data[i].asJsonObject["facilityName"].asString
-                        val address = data[i].asJsonObject["address"].asString
-//                        val phoneNumber = data[i].asJsonObject["phoneNumber"].asString
-//                        val operatingTime = data[i].asJsonObject["operatingTime"].asString
-//                        val operatingDate = data[i].asJsonObject["operatingDate"].asString
 
-                        val phoneNumber = "TestNum"
-                        val operatingTime = "TestTime"
-                        val operatingDate = "TestDate"
+                        val dataObject = data[i].asJsonObject
+                        val facilityName = dataObject["facilityName"].asString
+                        val address = dataObject["address"].asString
 
-                        val latitude = data[i].asJsonObject["latitude"].asDouble
-                        val longitude = data[i].asJsonObject["longitude"].asDouble
+                        val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
+                        else dataObject["phoneNumber"].asString
 
+                        val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
+                        else dataObject["operatingTime"].asString
+
+                        val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
+                        else dataObject["operatingDate"].asString
+
+                        val latitude = dataObject["latitude"].asDouble
+                        val longitude = dataObject["longitude"].asDouble
                         val soupKitchenDataObject = JSONObject()
                         soupKitchenDataObject.put("facilityName",facilityName)
                         soupKitchenDataObject.put("address",address)
@@ -178,7 +184,7 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                         marker.customCalloutBalloon
                         mapView.addPOIItem(marker)
                     }
-                }
+                } else if (!response.isSuccessful) failMessage.show()
             }
         })
     }
@@ -186,9 +192,11 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
     private fun soupKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
 
+        val failMessage = Toast.makeText(this,"조회에 실패했습니다", Toast.LENGTH_SHORT)
+
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
+                failMessage.show()
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -231,7 +239,7 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                         marker.customCalloutBalloon
                         mapView.addPOIItem(marker)
                     }
-                }
+                } else if (!response.isSuccessful) failMessage.show()
             }
         })
     }

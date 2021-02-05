@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.garam.takemissinginfo.R
@@ -22,7 +23,6 @@ class BenefitInfoActivity : AppCompatActivity() {
 
     private lateinit var benefitRecycler : BenefitRecyclerViewAdapter
     private var lists = arrayListOf<BenefitInfoData>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +63,12 @@ class BenefitInfoActivity : AppCompatActivity() {
 
     private fun benefit(type: String?, benefitType: ArrayList<String>){
 
-        networkService.benefitsRequest(type.toString(),benefitType).enqueue(object :
-            Callback<JsonObject> {
+        val failMessage = Toast.makeText(this,"혜택 조회에 실패했습니다",Toast.LENGTH_SHORT)
+
+        networkService.benefitsRequest(type.toString(),benefitType).enqueue(object : Callback<JsonObject> {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
+                failMessage.show()
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -76,7 +77,6 @@ class BenefitInfoActivity : AppCompatActivity() {
                     val data = responseBody?.get("data")?.asJsonArray
 
                     for ( i in 0 until data?.size()!!) {
-
                         val competentInstitution =
                             data[i]?.asJsonObject?.get("competentInstitution")?.asString.toString()
                         val detailsInfo = data[i]?.asJsonObject?.get("detailsInfo")?.asString.toString()
@@ -84,17 +84,10 @@ class BenefitInfoActivity : AppCompatActivity() {
                         val benefitName = data[i]?.asJsonObject?.get("name")?.asString.toString()
                         val supportForm = data[i]?.asJsonObject?.get("supportForm")?.asString.toString()
 
-                        lists.add(
-                            BenefitInfoData(
-                                competentInstitution,
-                                detailsInfo,
-                                detailsInfoUrl,
-                                benefitName,
-                                supportForm
-                            )
-                        )
+                        lists.add(BenefitInfoData(competentInstitution, detailsInfo, detailsInfoUrl,
+                                benefitName, supportForm))
                     }
-                }
+                } else if (!response.isSuccessful) { failMessage.show() }
 
                 benefitRecycler.notifyDataSetChanged()
             }

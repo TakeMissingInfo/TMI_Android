@@ -1,15 +1,11 @@
 package com.example.garam.takemissinginfo.benefit
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.garam.takemissinginfo.R
 import kotlinx.android.synthetic.main.activity_sub_class.*
-import kotlin.reflect.typeOf
 
 class SubClass : AppCompatActivity() {
 
