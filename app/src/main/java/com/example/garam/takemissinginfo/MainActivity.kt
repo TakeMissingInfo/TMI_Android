@@ -24,13 +24,12 @@ class MainActivity : AppCompatActivity() {
         var nextIntent : Intent
 
         benefitButton.setOnClickListener {
-            nextIntent = Intent(this,
-                MainCategory::class.java)
+            nextIntent = Intent(this, MainCategory::class.java)
             startActivity(nextIntent)
         }
 
         soupKitchenButton.setOnClickListener {
-            nextIntent = Intent(this,SoupKitchenActivity::class.java)
+            nextIntent = Intent(this, SoupKitchenActivity::class.java)
             startActivity(nextIntent)
         }
 

@@ -18,8 +18,6 @@ class SubClass : AppCompatActivity() {
         setContentView(R.layout.activity_sub_class)
         val intent = intent
         val menuName = intent.getStringExtra("menuName")
-        val location = intent.getStringExtra("location")
-        Toast.makeText(this,"$menuName , $location", Toast.LENGTH_SHORT).show()
 
         val benefitArray = ArrayList<String> ()
         val testArray = HashMap<String,String> ()
@@ -191,7 +189,7 @@ class SubClass : AppCompatActivity() {
             nextIntent.putExtra("type",menuName)
             nextIntent.putExtra("benefitType", benefitArray)
             nextIntent.putExtra("testType",testArray)
-            Log.e("???","${testArray.keys}")
+
             startActivity(nextIntent)
         }
     }
