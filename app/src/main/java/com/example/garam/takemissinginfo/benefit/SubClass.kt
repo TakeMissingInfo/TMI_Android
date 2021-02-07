@@ -15,8 +15,7 @@ class SubClass : AppCompatActivity() {
         val intent = intent
         val menuName = intent.getStringExtra("menuName")
 
-        val benefitArray = ArrayList<String> ()
-        val testArray = HashMap<String,String> ()
+        val benefitHashMap = HashMap<String,String> ()
 
         class BtnClick : View.OnClickListener {
             override fun onClick(v: View) {
@@ -24,16 +23,14 @@ class SubClass : AppCompatActivity() {
                     employmentButton.id -> {
                         if (!employmentButton.isSelected) {
 
-                            benefitArray.add("EMPLOYMENT")
-                            testArray["EMPLOYMENT"] = "${employmentButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["EMPLOYMENT"] = "${employmentButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             employmentButton.isSelected = true
 
                         } else if (employmentButton.isSelected) {
 
-                            benefitArray.remove("EMPLOYMENT")
-                            testArray.remove("EMPLOYMENT")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("EMPLOYMENT")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             employmentButton.isSelected = false
 
                         }
@@ -42,16 +39,14 @@ class SubClass : AppCompatActivity() {
                     financeButton.id -> {
                         if (!financeButton.isSelected) {
 
-                            benefitArray.add("FINANCE")
-                            testArray["FINANCE"] = "${financeButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["FINANCE"] = "${financeButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             financeButton.isSelected = true
 
                         } else if (financeButton.isSelected) {
 
-                            benefitArray.remove("FINANCE")
-                            testArray.remove("FINANCE")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("FINANCE")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             financeButton.isSelected = false
 
                         }
@@ -60,16 +55,14 @@ class SubClass : AppCompatActivity() {
                     lifeButton.id -> {
                         if (!lifeButton.isSelected) {
 
-                            benefitArray.add("LIFE")
-                            testArray["LIFE"] = "${lifeButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["LIFE"] = "${lifeButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             lifeButton.isSelected = true
 
                         } else if (lifeButton.isSelected) {
 
-                            benefitArray.remove("LIFE")
-                            testArray.remove("LIFE")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("LIFE")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             lifeButton.isSelected = false
 
                         }
@@ -78,16 +71,14 @@ class SubClass : AppCompatActivity() {
                     medicalButton.id -> {
                         if (!medicalButton.isSelected) {
 
-                            benefitArray.add("MEDICAL_CARE")
-                            testArray["MEDICAL_CARE"] = "${medicalButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["MEDICAL_CARE"] = "${medicalButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             medicalButton.isSelected = true
 
                         } else if (medicalButton.isSelected){
 
-                            benefitArray.remove("MEDICAL_CARE")
-                            testArray.remove("MEDICAL_CARE")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("MEDICAL_CARE")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             medicalButton.isSelected = false
 
                         }
@@ -96,16 +87,14 @@ class SubClass : AppCompatActivity() {
                     parentingButton.id -> {
                         if (!parentingButton.isSelected) {
 
-                            benefitArray.add("MARRIAGE_PARENTING")
-                            testArray["MARRIAGE_PARENTING"] = "${parentingButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["MARRIAGE_PARENTING"] = "${parentingButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             parentingButton.isSelected = true
 
                         } else if(parentingButton.isSelected){
 
-                            benefitArray.remove("MARRIAGE_PARENTING")
-                            testArray.remove("MARRIAGE_PARENTING")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("MARRIAGE_PARENTING")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             parentingButton.isSelected = false
 
                         }
@@ -114,16 +103,14 @@ class SubClass : AppCompatActivity() {
                     environmentButton.id -> {
                         if (!environmentButton.isSelected) {
 
-                            benefitArray.add("ENVIRONMENTAL_DISASTER")
-                            testArray["ENVIRONMENTAL_DISASTER"] = "${environmentButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["ENVIRONMENTAL_DISASTER"] = "${environmentButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             environmentButton.isSelected = true
 
                         } else if (environmentButton.isSelected){
 
-                            benefitArray.remove("ENVIRONMENTAL_DISASTER")
-                            testArray.remove("ENVIRONMENTAL_DISASTER")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("ENVIRONMENTAL_DISASTER")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             environmentButton.isSelected = false
 
                         }
@@ -132,16 +119,14 @@ class SubClass : AppCompatActivity() {
                     housingButton.id -> {
                         if (!housingButton.isSelected) {
 
-                            benefitArray.add("HOUSING")
-                            testArray["HOUSING"] = "${housingButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["HOUSING"] = "${housingButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             housingButton.isSelected = true
 
                         } else if (housingButton.isSelected){
 
-                            benefitArray.remove("HOUSING")
-                            testArray.remove("HOUSING")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("HOUSING")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             housingButton.isSelected = false
 
                         }
@@ -151,16 +136,14 @@ class SubClass : AppCompatActivity() {
 
                         if (!carButton.isSelected){
 
-                            benefitArray.add("MOTOR_TRAFFIC")
-                            testArray["MOTOR_TRAFFIC"] = "${carButton.text}"
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap["MOTOR_TRAFFIC"] = "${carButton.text}"
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             carButton.isSelected = true
 
                         } else {
 
-                            benefitArray.remove("MOTOR_TRAFFIC")
-                            testArray.remove("MOTOR_TRAFFIC")
-                            selectedClassTextView.text = testArray.values.toString()
+                            benefitHashMap.remove("MOTOR_TRAFFIC")
+                            selectedClassTextView.text = benefitHashMap.values.toString()
                             carButton.isSelected = false
                         }
                     }
@@ -183,8 +166,7 @@ class SubClass : AppCompatActivity() {
 
             val nextIntent = Intent(this, BenefitInfoActivity::class.java)
             nextIntent.putExtra("type",menuName)
-            nextIntent.putExtra("benefitType", benefitArray)
-            nextIntent.putExtra("testType",testArray)
+            nextIntent.putExtra("benefitType",benefitHashMap)
 
             startActivity(nextIntent)
         }

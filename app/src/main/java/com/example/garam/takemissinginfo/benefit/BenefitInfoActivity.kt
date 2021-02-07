@@ -30,14 +30,11 @@ class BenefitInfoActivity : AppCompatActivity() {
 
         val intent = intent
         val type = intent.getStringExtra("type")
-        val benefitType = intent.getStringArrayListExtra("benefitType")
+        val benefitType = intent.getSerializableExtra("benefitType")
+        val benefitTypeHashMap = benefitType as HashMap<String, String>
+        val benefitList = ArrayList(benefitTypeHashMap.keys)
 
-        val testType = intent.getSerializableExtra("testType")
-        val testBenefitType = testType as HashMap<*, *>
-        Log.e("테스트", testBenefitType.keys.toString())
-        Log.e("222","$benefitType")
-
-        benefit(type, benefitType)
+        benefit(type, benefitList)
 
         val recycler = findViewById<RecyclerView>(R.id.benefitRecycler)
 
