@@ -32,7 +32,9 @@ class SubClass : AppCompatActivity() {
                         } else if (employmentButton.isSelected) {
                             employmentButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("EMPLOYMENT")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
+
                             employmentButton.isSelected = false
 
                         }
@@ -48,7 +50,8 @@ class SubClass : AppCompatActivity() {
                         } else if (financeButton.isSelected) {
                             financeButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("FINANCE")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             financeButton.isSelected = false
 
                         }
@@ -64,7 +67,8 @@ class SubClass : AppCompatActivity() {
                         } else if (lifeButton.isSelected) {
                             lifeButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("LIFE")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             lifeButton.isSelected = false
 
                         }
@@ -80,7 +84,8 @@ class SubClass : AppCompatActivity() {
                         } else if (medicalButton.isSelected){
                             medicalButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("MEDICAL_CARE")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             medicalButton.isSelected = false
 
                         }
@@ -96,7 +101,8 @@ class SubClass : AppCompatActivity() {
                         } else if(parentingButton.isSelected){
                             parentingButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("MARRIAGE_PARENTING")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             parentingButton.isSelected = false
 
                         }
@@ -112,7 +118,8 @@ class SubClass : AppCompatActivity() {
                         } else if (environmentButton.isSelected){
                             environmentButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("ENVIRONMENTAL_DISASTER")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             environmentButton.isSelected = false
 
                         }
@@ -128,7 +135,8 @@ class SubClass : AppCompatActivity() {
                         } else if (housingButton.isSelected){
                             housingButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("HOUSING")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             housingButton.isSelected = false
 
                         }
@@ -145,7 +153,8 @@ class SubClass : AppCompatActivity() {
                         } else if (carButton.isSelected){
                             carButton.setTextColor(Color.BLACK)
                             benefitHashMap.remove("MOTOR_TRAFFIC")
-                            selectedClassTextView.text = benefitHashMap.values.toString()
+                            selectedClassTextView.text = if (benefitHashMap.isEmpty()) ""
+                            else benefitHashMap.values.toString()
                             carButton.isSelected = false
                         }
                     }
