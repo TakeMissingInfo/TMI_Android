@@ -12,17 +12,10 @@ interface NetworkService {
         @Query ("benefitType") benefitType : ArrayList<String>
     ) : Call<JsonObject>
 
-    @POST("/api/v1/weakperson/renew")
-    fun benefitRenewal(
-        @Body renewRequest : JsonObject
-    ) : Call<JsonObject>
-
     @GET("/api/v1/cafeteria/{latitude}/{longitude}")
     fun soupKitchenRequest(
         @Path ("latitude") latitude : Double,
         @Path ("longitude") longitude : Double
     ) : Call<JsonObject>
 
-    @POST("/api/v1/cafeteria/renew")
-    fun soupKitchenRenewal() : Call<JsonObject>
 }
