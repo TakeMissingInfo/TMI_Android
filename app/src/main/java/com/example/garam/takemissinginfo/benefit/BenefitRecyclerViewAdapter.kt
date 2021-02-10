@@ -10,7 +10,7 @@ import com.example.garam.takemissinginfo.R
 
 class BenefitRecyclerViewAdapter(
     private val items: ArrayList<BenefitInfoData>,
-    val context: Context,
+    private val context: Context,
     val itemClick:(BenefitInfoData) -> Unit): RecyclerView.Adapter<BenefitRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
