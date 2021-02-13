@@ -147,48 +147,51 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body()!!.asJsonObject
-                    val data = responseBody["data"].asJsonArray
+                when (response.isSuccessful) {
+                    true -> {
+                        val responseBody = response.body()!!.asJsonObject
+                        val data = responseBody["data"].asJsonArray
 
-                    for ( i in 0 until 5){
+                        for ( i in 0 until 5){
 
-                        val dataObject = data[i].asJsonObject
-                        val facilityName = dataObject["facilityName"].asString
-                        val address = dataObject["address"].asString
+                            val dataObject = data[i].asJsonObject
+                            val facilityName = dataObject["facilityName"].asString
+                            val address = dataObject["address"].asString
 
-                        val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
-                        else dataObject["phoneNumber"].asString
+                            val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
+                            else dataObject["phoneNumber"].asString
 
-                        val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
-                        else dataObject["operatingTime"].asString
+                            val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
+                            else dataObject["operatingTime"].asString
 
-                        val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
-                        else dataObject["operatingDate"].asString
+                            val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
+                            else dataObject["operatingDate"].asString
 
-                        val latitude = dataObject["latitude"].asDouble
-                        val longitude = dataObject["longitude"].asDouble
-                        val soupKitchenDataObject = JSONObject()
-                        soupKitchenDataObject.put("facilityName",facilityName)
-                        soupKitchenDataObject.put("address",address)
-                        soupKitchenDataObject.put("phoneNumber",phoneNumber)
-                        soupKitchenDataObject.put("operatingTime",operatingTime)
-                        soupKitchenDataObject.put("operatingDate",operatingDate)
-                        soupKitchenDataObject.put("latitude",latitude)
-                        soupKitchenDataObject.put("longitude",longitude)
+                            val latitude = dataObject["latitude"].asDouble
+                            val longitude = dataObject["longitude"].asDouble
 
-                        val marker = MapPOIItem()
-                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
-                        marker.itemName = facilityName
-                        marker.userObject = soupKitchenDataObject
-                        marker.customCalloutBalloon
-                        mapView.addPOIItem(marker)
-                    }
-                } else if (!response.isSuccessful) failMessage.show()
+                            val soupKitchenDataObject = JSONObject()
+
+                            soupKitchenDataObject.put("facilityName",facilityName)
+                            soupKitchenDataObject.put("address",address)
+                            soupKitchenDataObject.put("phoneNumber",phoneNumber)
+                            soupKitchenDataObject.put("operatingTime",operatingTime)
+                            soupKitchenDataObject.put("operatingDate",operatingDate)
+                            soupKitchenDataObject.put("latitude",latitude)
+                            soupKitchenDataObject.put("longitude",longitude)
+
+                            val marker = MapPOIItem()
+                            marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
+                            marker.itemName = facilityName
+                            marker.userObject = soupKitchenDataObject
+                            marker.customCalloutBalloon
+                            mapView.addPOIItem(marker)
+                        }
+                    } false -> failMessage.show()
+                }
             }
         })
     }
-
 
     private fun soupKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
 
@@ -200,46 +203,48 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body()!!
-                    val data = responseBody.get("data").asJsonArray
+                when (response.isSuccessful) {
+                    true -> {
+                        val responseBody = response.body()!!
+                        val data = responseBody.get("data").asJsonArray
 
-                    for ( i in 0 until data.size()){
+                        for ( i in 0 until data.size()){
 
-                        val dataObject = data[i].asJsonObject
-                        val facilityName = dataObject["facilityName"].asString
-                        val address = dataObject["address"].asString
+                            val dataObject = data[i].asJsonObject
+                            val facilityName = dataObject["facilityName"].asString
+                            val address = dataObject["address"].asString
 
-                        val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
-                        else dataObject["phoneNumber"].asString
+                            val phoneNumber = if (dataObject["phoneNumber"].isJsonNull) "정보없음"
+                            else dataObject["phoneNumber"].asString
 
-                        val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
-                        else dataObject["operatingTime"].asString
+                            val operatingTime = if (dataObject["operatingTime"].isJsonNull) "정보없음"
+                            else dataObject["operatingTime"].asString
 
-                        val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
-                        else dataObject["operatingDate"].asString
+                            val operatingDate = if (dataObject["operatingDate"].isJsonNull) "정보없음"
+                            else dataObject["operatingDate"].asString
 
-                        val latitude = dataObject["latitude"].asDouble
-                        val longitude = dataObject["longitude"].asDouble
+                            val latitude = dataObject["latitude"].asDouble
+                            val longitude = dataObject["longitude"].asDouble
 
-                        val soupKitchenDataObject = JSONObject()
+                            val soupKitchenDataObject = JSONObject()
 
-                        soupKitchenDataObject.put("facilityName",facilityName)
-                        soupKitchenDataObject.put("address",address)
-                        soupKitchenDataObject.put("phoneNumber",phoneNumber)
-                        soupKitchenDataObject.put("operatingTime",operatingTime)
-                        soupKitchenDataObject.put("operatingDate",operatingDate)
-                        soupKitchenDataObject.put("latitude",latitude)
-                        soupKitchenDataObject.put("longitude",longitude)
+                            soupKitchenDataObject.put("facilityName",facilityName)
+                            soupKitchenDataObject.put("address",address)
+                            soupKitchenDataObject.put("phoneNumber",phoneNumber)
+                            soupKitchenDataObject.put("operatingTime",operatingTime)
+                            soupKitchenDataObject.put("operatingDate",operatingDate)
+                            soupKitchenDataObject.put("latitude",latitude)
+                            soupKitchenDataObject.put("longitude",longitude)
 
-                        val marker = MapPOIItem()
-                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
-                        marker.itemName = facilityName
-                        marker.userObject = soupKitchenDataObject
-                        marker.customCalloutBalloon
-                        mapView.addPOIItem(marker)
-                    }
-                } else if (!response.isSuccessful) failMessage.show()
+                            val marker = MapPOIItem()
+                            marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
+                            marker.itemName = facilityName
+                            marker.userObject = soupKitchenDataObject
+                            marker.customCalloutBalloon
+                            mapView.addPOIItem(marker)
+                        }
+                    } false -> failMessage.show()
+                }
             }
         })
     }
