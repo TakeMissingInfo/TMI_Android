@@ -68,23 +68,24 @@ class BenefitInfoActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    val data = responseBody?.get("data")?.asJsonArray
+                when (response.isSuccessful) {
+                    true -> {
+                        val responseBody = response.body()
+                        val data = responseBody?.get("data")?.asJsonArray
 
-                    for ( i in 0 until data?.size()!!) {
-                        val competentInstitution =
-                            data[i]?.asJsonObject?.get("competentInstitution")?.asString.toString()
-                        val detailsInfo = data[i]?.asJsonObject?.get("detailsInfo")?.asString.toString()
-                        val detailsInfoUrl = data[i]?.asJsonObject?.get("detailsInfoUrl")?.asString.toString()
-                        val benefitName = data[i]?.asJsonObject?.get("name")?.asString.toString()
-                        val supportForm = data[i]?.asJsonObject?.get("supportForm")?.asString.toString()
+                        for ( i in 0 until data?.size()!!) {
+                            val competentInstitution = data[i]?.asJsonObject?.get("competentInstitution")?.asString.toString()
+                            val detailsInfo = data[i]?.asJsonObject?.get("detailsInfo")?.asString.toString()
+                            val detailsInfoUrl = data[i]?.asJsonObject?.get("detailsInfoUrl")?.asString.toString()
+                            val benefitName = data[i]?.asJsonObject?.get("name")?.asString.toString()
+                            val supportForm = data[i]?.asJsonObject?.get("supportForm")?.asString.toString()
 
-                        lists.add(BenefitInfoData(competentInstitution, detailsInfo, detailsInfoUrl,
+                            lists.add(BenefitInfoData(competentInstitution, detailsInfo, detailsInfoUrl,
                                 benefitName, supportForm))
+                        }
                     }
-                } else if (!response.isSuccessful) { failMessage.show() }
-
+                    false ->  failMessage.show()
+                }
                 benefitRecycler.notifyDataSetChanged()
             }
         })

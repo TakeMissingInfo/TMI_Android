@@ -136,10 +136,10 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         mapViewLayout.addView(mapView)
 
     }
+    private val failMessage = Toast.makeText(this,"조회에 실패했습니다", Toast.LENGTH_SHORT)
 
     private fun nearByKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
 
-        val failMessage = Toast.makeText(this,"조회에 실패했습니다", Toast.LENGTH_SHORT)
 
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
@@ -194,8 +194,6 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
     }
 
     private fun soupKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
-
-        val failMessage = Toast.makeText(this,"조회에 실패했습니다", Toast.LENGTH_SHORT)
 
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
