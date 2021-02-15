@@ -140,7 +140,6 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
 
     private fun nearByKitchenMarker(currentLatitude: Double, currentLongitude: Double, mapView: MapView){
 
-
         networkService.soupKitchenRequest(currentLatitude, currentLongitude).enqueue(object : Callback<JsonObject>{
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 failMessage.show()
@@ -170,15 +169,8 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                             val latitude = dataObject["latitude"].asDouble
                             val longitude = dataObject["longitude"].asDouble
 
-                            val soupKitchenDataObject = JSONObject()
-
-                            soupKitchenDataObject.put("facilityName",facilityName)
-                            soupKitchenDataObject.put("address",address)
-                            soupKitchenDataObject.put("phoneNumber",phoneNumber)
-                            soupKitchenDataObject.put("operatingTime",operatingTime)
-                            soupKitchenDataObject.put("operatingDate",operatingDate)
-                            soupKitchenDataObject.put("latitude",latitude)
-                            soupKitchenDataObject.put("longitude",longitude)
+                            val soupKitchenDataObject = dataToJsonObject(facilityName, address, phoneNumber,
+                                operatingTime, operatingDate, latitude, longitude)
 
                             val marker = MapPOIItem()
                             marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
@@ -224,15 +216,8 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
                             val latitude = dataObject["latitude"].asDouble
                             val longitude = dataObject["longitude"].asDouble
 
-                            val soupKitchenDataObject = JSONObject()
-
-                            soupKitchenDataObject.put("facilityName",facilityName)
-                            soupKitchenDataObject.put("address",address)
-                            soupKitchenDataObject.put("phoneNumber",phoneNumber)
-                            soupKitchenDataObject.put("operatingTime",operatingTime)
-                            soupKitchenDataObject.put("operatingDate",operatingDate)
-                            soupKitchenDataObject.put("latitude",latitude)
-                            soupKitchenDataObject.put("longitude",longitude)
+                            val soupKitchenDataObject = dataToJsonObject(facilityName, address, phoneNumber,
+                                operatingTime, operatingDate, latitude, longitude)
 
                             val marker = MapPOIItem()
                             marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude,longitude)
@@ -246,6 +231,24 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
             }
         })
     }
+
+    private fun dataToJsonObject(facilityName: String, address: String, phoneNumber: String,
+    operatingTime:String, operatingDate:String, latitude: Double, longitude: Double): JSONObject {
+
+        val soupKitchenDataObject = JSONObject()
+
+        soupKitchenDataObject.put("facilityName",facilityName)
+        soupKitchenDataObject.put("address",address)
+        soupKitchenDataObject.put("phoneNumber",phoneNumber)
+        soupKitchenDataObject.put("operatingTime",operatingTime)
+        soupKitchenDataObject.put("operatingDate",operatingDate)
+        soupKitchenDataObject.put("latitude",latitude)
+        soupKitchenDataObject.put("longitude",longitude)
+
+
+        return soupKitchenDataObject
+    }
+
 
     private fun showDialog(infoObject: JsonObject, itemName: String, latitude: Double, longitude: Double){
 
