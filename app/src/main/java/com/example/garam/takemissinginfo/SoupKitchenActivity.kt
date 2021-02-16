@@ -245,10 +245,8 @@ class SoupKitchenActivity : AppCompatActivity(), MapView.MapViewEventListener, M
         soupKitchenDataObject.put("latitude",latitude)
         soupKitchenDataObject.put("longitude",longitude)
 
-
         return soupKitchenDataObject
     }
-
 
     private fun showDialog(infoObject: JsonObject, itemName: String, latitude: Double, longitude: Double){
 

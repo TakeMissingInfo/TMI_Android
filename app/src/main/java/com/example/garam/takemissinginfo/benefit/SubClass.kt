@@ -16,6 +16,8 @@ class SubClass : AppCompatActivity() {
         val intent = intent
         val menuName = intent.getStringExtra("menuName")
 
+        val textColor = Color.rgb(107,8,49)
+
         val benefitHashMap = HashMap<String,String> ()
 
         class BtnClick : View.OnClickListener {
@@ -25,7 +27,7 @@ class SubClass : AppCompatActivity() {
                     employmentButton.id -> {
                         when (employmentButton.isSelected) {
                             false -> {
-                                employmentButton.setTextColor(Color.rgb(107,8,49))
+                                employmentButton.setTextColor(textColor)
                                 benefitHashMap["EMPLOYMENT"] = "${employmentButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 employmentButton.isSelected = true
@@ -43,7 +45,7 @@ class SubClass : AppCompatActivity() {
                     financeButton.id -> {
                         when (financeButton.isSelected) {
                             false ->{
-                                financeButton.setTextColor(Color.rgb(107,8,49))
+                                financeButton.setTextColor(textColor)
                                 benefitHashMap["FINANCE"] = "${financeButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 financeButton.isSelected = true
@@ -61,7 +63,7 @@ class SubClass : AppCompatActivity() {
                     lifeButton.id -> {
                         when (lifeButton.isSelected) {
                             false -> {
-                                lifeButton.setTextColor(Color.rgb(107,8,49))
+                                lifeButton.setTextColor(textColor)
                                 benefitHashMap["LIFE"] = "${lifeButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 lifeButton.isSelected = true
@@ -81,7 +83,7 @@ class SubClass : AppCompatActivity() {
                         when (medicalButton.isSelected) {
 
                             false -> {
-                                medicalButton.setTextColor(Color.rgb(107,8,49))
+                                medicalButton.setTextColor(textColor)
                                 benefitHashMap["MEDICAL_CARE"] = "${medicalButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 medicalButton.isSelected = true
@@ -99,7 +101,7 @@ class SubClass : AppCompatActivity() {
                     parentingButton.id -> {
                         when (parentingButton.isSelected) {
                             false -> {
-                                parentingButton.setTextColor(Color.rgb(107,8,49))
+                                parentingButton.setTextColor(textColor)
                                 benefitHashMap["MARRIAGE_PARENTING"] = "${parentingButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 parentingButton.isSelected = true
@@ -118,7 +120,7 @@ class SubClass : AppCompatActivity() {
                     environmentButton.id -> {
                         when (environmentButton.isSelected) {
                             false -> {
-                                environmentButton.setTextColor(Color.rgb(107,8,49))
+                                environmentButton.setTextColor(textColor)
                                 benefitHashMap["ENVIRONMENTAL_DISASTER"] = "${environmentButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 environmentButton.isSelected = true
@@ -137,7 +139,7 @@ class SubClass : AppCompatActivity() {
                     housingButton.id -> {
                         when (housingButton.isSelected){
                             false -> {
-                                housingButton.setTextColor(Color.rgb(107,8,49))
+                                housingButton.setTextColor(textColor)
                                 benefitHashMap["HOUSING"] = "${housingButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 housingButton.isSelected = true
@@ -156,7 +158,7 @@ class SubClass : AppCompatActivity() {
 
                         when (carButton.isSelected){
                             false ->{
-                                carButton.setTextColor(Color.rgb(107,8,49))
+                                carButton.setTextColor(textColor)
                                 benefitHashMap["MOTOR_TRAFFIC"] = "${carButton.text}"
                                 selectedClassTextView.text = selectedText(benefitHashMap)
                                 carButton.isSelected = true
