@@ -35,3 +35,7 @@
 ## 테스트 환경
 
 - 갤럭시 S20
+
+## 시연 영상
+
+https://youtu.be/ic2_MVIiT3I
