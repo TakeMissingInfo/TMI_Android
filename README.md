@@ -30,6 +30,7 @@
 - Retrofit2 2.7.0
 - Androidx
   - recyclerview 1.1.0
+- Kakao Map
 
 ## 테스트 환경
 
